@@ -26,7 +26,7 @@ do
     min_load=$(cat /proc/loadavg | cut -d . -f1)
     if [ $min_load -ge $load_threshold ]
         then
-        echo -e "🔥 High CPU usage detected\n🛡  $(hostname)\n🔮 $ip\n💈$(uptime)\n#CPU" > $msg_caption
+        echo -e "🔥High CPU usage detected\n\n🛡  $(hostname)\n\n🔮 $ip\n\n💈$(uptime)\n\n#CPU" > $msg_caption
         echo -e "CPU usage report from $(hostname)\nServer Time : $(date +"%d%b%Y %T")\n\n\$uptime\n$(uptime)\n\n%CPU %MEM USER\tCMD" >         $resource_usage_info
         ps -eo pcpu,pmem,user,cmd | sed '1d' | sort -nr >> $resource_usage_info
         caption=$(<$msg_caption)
@@ -42,7 +42,7 @@ do
     mem_usage=$(echo "$mem" | awk 'NR==2{printf "%i\n", ($3*100/$2)}')
     if [ $mem_usage -gt $mem_threshold ]
     then
-        echo -e "🔥 High Memory usage detected\n🛡  $(hostname)\n🔮 $ip\n💊 $(echo $mem_usage% memory usage)\n#RAM" > $msg_caption
+        echo -e "🔥High Memory usage detected\n\n🛡  $(hostname)\n\n🔮 $ip\n\n💊 $(echo $mem_usage% memory usage)\n\n#RAM" > $msg_caption
         echo -e "Memory consumption Report from $(hostname)\nServer Time : $(date +"%d%b%Y %T")\n\n\$free -m output\n$mem\n\n%MEM %CPU USER\tCMD" > $resource_usage_info
         ps -eo pmem,pcpu,user,cmd | sed '1d' | sort -nr >> $resource_usage_info
         caption=$(<$msg_caption)
