@@ -26,7 +26,7 @@ do
     min_load=$(cat /proc/loadavg | cut -d . -f1)
     if [ $min_load -ge $load_threshold ]
         then
-        echo -e "🔥High CPU usage detected\n\n🛡$(hostname)\n\n💈$(uptime)\n\n#CPU" > $msg_caption
+        echo -e "🔥High CPU usage detected\n\n🛡$(hostname)\n\n💈:$(uptime)\n\n#CPU" > $msg_caption
         echo -e "CPU usage report from $(hostname)\nServer Time : $(date +"%d%b%Y %T")\n\n\$uptime\n$(uptime)\n\n%CPU %MEM USER\tCMD" >         $resource_usage_info
         ps -eo pcpu,pmem,user,cmd | sed '1d' | sort -nr >> $resource_usage_info
         caption=$(<$msg_caption)
